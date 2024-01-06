@@ -1,7 +1,10 @@
 <input type="search" name="search" [formControl]="control">
+<button (click)="send(control.value)">Enviar</button>
 
-<ul>
-    @for (product of products$ | async; track $index;) {
+<!-- <ul>
+    @for (product of products$ | async; track product.name;) {
       <li>{{ product.name }}</li>
+    } @empty {
+      Sem nenhum resultado.
     }
-</ul>
+</ul> -->

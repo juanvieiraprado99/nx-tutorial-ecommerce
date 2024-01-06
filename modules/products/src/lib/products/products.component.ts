@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Observable, debounceTime, filter, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Product } from '../models/product-search';
-import { ProductSearchService } from '../services/product-search/product-search.service';
 
 @Component({
   selector: 'ecommerce-products',
@@ -12,17 +11,21 @@ import { ProductSearchService } from '../services/product-search/product-search.
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
   control = new FormControl('', { nonNullable: true });
   products$!: Observable<Product[]>;
 
-  constructor(private productSearchService: ProductSearchService) {}
+  // constructor(private productSearchService: ProductSearchService) {}
 
-  ngOnInit(): void {
-    this.products$ = this.control.valueChanges.pipe(
-      filter(text => text?.length > 1),
-      debounceTime(500),
-      switchMap(text => this.productSearchService.searchByTerm(text))
-    )
+  // ngOnInit(): void {
+  //   this.products$ = this.control.valueChanges.pipe(
+  //     filter(text => text?.length > 1),
+  //     debounceTime(500),
+  //     switchMap(text => this.productSearchService.searchByTerm(text))
+  //   )
+  // }
+
+  send(value: string): void {
+    console.log(value);
   }
 }
